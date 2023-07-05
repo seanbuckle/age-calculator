@@ -26,23 +26,70 @@
   --heading-l-font-size: 104px;
   --heading-m-font-size: 1.5rem;
   --heading-s-font-size: 1.25rem;
-  --body-font-size: ;
-  --input-font-size: ;
-  --font-family: "Poppins", sans-serif;
+  --body-font-size: 1rem;
+  --label-font-size: 0.875rem;
+  --input-font-size: 2rem;
+  --font-family: Poppins, sans-serif;
 }
 
 body {
   min-block-size: 100dvh;
   background-color: var(--off-white);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  font: var(--font-weight-regular) var(--body-font-size)/normal var(--font-family);
 }
 
-footer {
+.site-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-block-size: 100dvh;
+  padding-block: 32px;
+  padding-inline: 16px;
+}
+
+.ac-card {
+  inline-size: 100%;
+  padding-block: 3rem;
+  padding-inline: 1.5rem;
+  border-start-start-radius: 24px;
+  border-start-end-radius: 24px;
+  border-end-start-radius: 24px;
+  border-end-end-radius: 200px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--white);
+}
+.ac-card__input-group {
+  inline-size: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.ac-card__date-input {
+  inline-size: 5.5rem;
+  block-size: 3.375rem;
+  margin-inline: 8px;
+  padding-block: 0.75rem;
+  padding-inline-start: 16px;
+  border: 1px solid var(--light-grey);
+  border-radius: 4px;
+  font: var(--font-weight-regular) var(--input-font-size)/normal var(--font-family);
+}
+.ac-card__date-input:nth-child(2) {
+  inline-size: 5.5rem;
+}
+.ac-card__date-input:nth-child(8) {
+  inline-size: 7.5rem;
+}
+
+.attribution {
+  inline-size: 100%;
   position: fixed;
   inset-block-end: 0;
+  display: flex;
+  justify-content: center;
 }
 
 /*# sourceMappingURL=style.css.map */
