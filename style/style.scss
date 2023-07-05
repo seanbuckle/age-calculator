@@ -29,3 +29,15 @@
   --input-font-size: ;
   --font-family: "Poppins", sans-serif;
 }
+body{
+  min-block-size: 100dvh;
+  background-color: var(--off-white);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+footer{
+  position: fixed;
+  inset-block-end: 0;
+}
