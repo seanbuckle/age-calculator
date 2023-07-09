@@ -11,7 +11,7 @@
   <body>
     <main class="site-main">
       <section class="ac-card">
-        <form class="ac-card__form">
+        <form class="ac-card__form" name="ac-form">
           <section class="ac-card__input-group">
             <section class="ac-card__input-group--column">
               <label
@@ -25,7 +25,6 @@
                 id="day"
                 class="ac-card__date-input ac-card__date-input--day"
                 placeholder="DD"
-                required
               />
               <label
                 for="day"
@@ -45,7 +44,6 @@
                 id="month"
                 class="ac-card__date-input ac-card__date-input--month"
                 placeholder="MM"
-                required
               />
               <label
                 for="month"
@@ -65,7 +63,6 @@
                 id="year"
                 class="ac-card__date-input ac-card__date-input--year"
                 placeholder="YYYY"
-                required
               />
               <label
                 for="year"
@@ -76,7 +73,7 @@
           </section>
           <section class="ac-card__btn-group">
             <hr class="ac-card__hr-line" />
-            <button type="submit" class="ac-card__btn">
+            <button type="submit" class="ac-card__btn" id="submit-btn">
               <img
                 class="ac-card__btn-icon"
                 src="images/icon-arrow.svg"
@@ -87,9 +84,9 @@
           </section>
         </form>
         <section class="ac-card__age-result">
-          <p><span class="ac-card__age-result--number">--</span> years</p>
-          <p><span class="ac-card__age-result--number">--</span> months</p>
-          <p><span class="ac-card__age-result--number">--</span> days</p>
+          <p><span class="ac-card__age-result--number" id="year-num">--</span><span id="year-txt">years</span></p>
+          <p><span class="ac-card__age-result--number" id="month-num">--</span> <span id="month-txt">months</span></p>
+          <p><span class="ac-card__age-result--number" id="day-num">--</span> <span id="day-txt">days</span></p>
         </section>
       </section>
     </main>
