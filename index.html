@@ -10,46 +10,86 @@
   <body>
     <main class="site-main">
       <section class="ac-card">
-        <form>
+        <form class="ac-card__form">
           <section class="ac-card__input-group">
-            <label for="day">Day</label>
-            <input
-              type="number"
-              name="day"
-              id="day"
-              class="ac-card__date-input"
-              placeholder="DD"
-              required
-            />
-            <label for="day" id="day-error"></label>
-            <label for="month">Month</label>
-            <input
-              type="number"
-              name="month"
-              id="month"
-              class="ac-card__date-input"
-              placeholder="MM"
-              required
-            />
-            <label for="month" id="month-error"></label>
-            <label for="year">Year</label>
-            <input
-              type="number"
-              name="year"
-              id="year"
-              class="ac-card__date-input"
-              placeholder="YYYY"
-              required
-            />
-            <label for="year" id="year-error"></label>
+            <section class="ac-card__input-group--column">
+              <label
+                for="day"
+                class="ac-card__input-label ac-card__input-label--day"
+                >Day</label
+              >
+              <input
+                type="number"
+                name="day"
+                id="day"
+                class="ac-card__date-input ac-card__date-input--day"
+                placeholder="DD"
+                required
+              />
+              <label
+                for="day"
+                id="day-error"
+                class="ac-card__error-label"
+              >Please enter day</label>
+            </section>
+            <section class="ac-card__input-group--column">
+              <label
+                for="month"
+                class="ac-card__input-label ac-card__input-label--month"
+                >Month</label
+              >
+              <input
+                type="number"
+                name="month"
+                id="month"
+                class="ac-card__date-input ac-card__date-input--month"
+                placeholder="MM"
+                required
+              />
+              <label
+                for="month"
+                id="month-error"
+                class="ac-card__error-label"
+              ></label>
+            </section>
+            <section class="ac-card__input-group--column">
+              <label
+                for="year"
+                class="ac-card__input-label ac-card__input-label--year"
+                >Year</label
+              >
+              <input
+                type="number"
+                name="year"
+                id="year"
+                class="ac-card__date-input ac-card__date-input--year"
+                placeholder="YYYY"
+                required
+              />
+              <label
+                for="year"
+                id="year-error"
+                class="ac-card__error-label"
+              ></label>
+            </section>
           </section>
-          <button type="submit">
-            <img src="images/icon-arrow.svg" alt="arrow icon" />
-          </button>
+          <section class="ac-card__btn-group">
+            <hr class="ac-card__hr-line" />
+            <button type="submit" class="ac-card__btn">
+              <img
+                class="ac-card__btn-icon"
+                src="images/icon-arrow.svg"
+                alt="arrow icon"
+              />
+            </button>
+            <hr class="ac-card__hr-line ac-card__hr-line--right" />
+          </section>
         </form>
-        <p>-- years</p>
-        <p>-- months</p>
-        <p>-- days</p>
+        <section class="ac-card__age-result">
+          <p><span class="ac-card__age-result--number">--</span> years</p>
+          <p><span class="ac-card__age-result--number">--</span> months</p>
+          <p><span class="ac-card__age-result--number">--</span> days</p>
+        </section>
       </section>
     </main>
     <footer class="attribution">
