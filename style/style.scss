@@ -32,6 +32,7 @@
   --body-font-size: 1rem;
   --label-font-size: 0.875rem;
   --input-font-size: 1.25rem;
+  --attribution-font-size: 0.688rem;
   --font-family: Poppins, sans-serif;
 }
 
@@ -162,6 +163,7 @@ body {
   .ac-card {
     &__hr-line {
       inline-size: calc(100% - 64px);
+
       &--right {
         display: none;
       }
@@ -171,4 +173,15 @@ body {
 
 .attribution {
   inline-size: 100%;
+  block-size: 4rem;
+  display: grid;
+  place-items: center;
+  font-size: var(--attribution-font-size);
+  &__link {
+    color: var(--purple);
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
