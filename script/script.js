@@ -1,157 +1,185 @@
-let form = document.getElementById("form");
-let day = document.getElementById("day");
-let month = document.getElementById("month");
-let year = document.getElementById("year");
-let dayError = document.getElementById("day-error");
-let monthError = document.getElementById("month-error");
-let yearError = document.getElementById("year-error");
-let dayNum = document.getElementById("day-num");
-let monthNum = document.getElementById("month-num");
-let yearNum = document.getElementById("year-num");
-let dayText = document.getElementById("day-txt");
-let monthText = document.getElementById("month-txt");
-let yearText = document.getElementById("year-txt");
-let currentDate = new Date();
-let currentDay = currentDate.getDate();
-let currentMonth = currentDate.getMonth() + 1;
-let currentYear = currentDate.getFullYear();
-let monthsLen = ["31","28","31","30","31","30","31","31","30","31","30","31"];
-let numsRegex = new RegExp(/^[0-9]*$/);
+"use strict";
+window.onload = () => {
+    const form = document.getElementById("form");
+    const day = document.getElementById("day");
+    const month = document.getElementById("month");
+    const year = document.getElementById("year");
+    const dayError = document.getElementById("day-error");
+    const monthError = document.getElementById("month-error");
+    const yearError = document.getElementById("year-error");
+    const dayNum = document.getElementById("day-num");
+    const monthNum = document.getElementById("month-num");
+    const yearNum = document.getElementById("year-num");
+    const dayText = document.getElementById("day-txt");
+    const monthText = document.getElementById("month-txt");
+    const yearText = document.getElementById("year-txt");
+    const currentDate = new Date();
+    const currentDay = currentDate.getDate();
+    const currentMonth = currentDate.getMonth() + 1;
+    const currentYear = currentDate.getFullYear();
+    const monthsLen = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    const numsRegex = /^[0-9]*$/;
 
-function days(){
-    if(day.value === ""){
-        dayError.innerHTML = "This field is required";
-    }else {
-        if(day.value.match(numsRegex) == null){
-            dayError.innerHTML = "Invalid day";
-        } else{
-            if(day.value < 1 || day.value > 31){
-                dayError.innerHTML = "Invalid day";
-            } else{
-                dayError.innerHTML = "";
-            }
+    function days() {
+        if (day.value === "") {
+            dayError.textContent = "This field is required";
         }
-    }
-}
-function months(){
-    if(month.value === ""){
-        monthError.innerHTML = "This field is required";
-    }else{
-        if(month.value.match(numsRegex) === null){
-            monthError.innerHTML = "Invalid month";
-        } else{
-            if(month.value < 1 || month.value > 12){
-                monthError.innerHTML = "Invalid month";
-            } else{
-                monthError.innerHTML = "";
+        else {
+            if (day.value.match(numsRegex) === null) {
+                dayError.textContent = "Invalid day";
             }
-        }
-    }
-}
-function years(){
-    if(year.value === ""){
-        yearError.innerHTML = "This field is required";
-    }else{
-        if(year.value.match(numsRegex) == null){
-            yearError.innerHTML = "Invalid year";
-        } else{
-            if(year.value < 1900 || year.value > currentYear){
-                yearError.innerHTML = "Invalid year";
-            } else{
-                yearError.innerHTML = "";
-                
+            else {
+                if (Number(day.value) < 1 || Number(day.value) > 31) {
+                    dayError.textContent = "Invalid day";
+                }
+                else {
+                    dayError.textContent = "";
+                }
             }
         }
     }
 
-}
-function age(){
-    let dayValue;
-    let monthValue;
-    let yearValue = currentYear - year.value;
-    if(currentMonth < month.value){
-        yearValue--;
-        monthValue = 12 - month.value + currentMonth;
-    }else{
-        monthValue = currentMonth - month.value;
+    function months() {
+        if (month.value === "") {
+            monthError.textContent = "This field is required";
+        }
+        else {
+            if (month.value.match(numsRegex) === null) {
+                monthError.textContent = "Invalid month";
+            }
+            else {
+                if (Number(month.value) < 1 || Number(month.value) > 12) {
+                    monthError.textContent = "Invalid month";
+                }
+                else {
+                    monthError.textContent = "";
+                }
+            }
+        }
     }
-    if(currentDay < day.value){
-        monthValue--;
-        dayValue = monthsLen[currentMonth - 2] - day.value + currentDay;
-    }else{
-        dayValue = currentDay - day.value;
-    }
-    if(dayValue == 1){
-        dayText.innerHTML = "day";
-    }else{
-        dayText.innerHTML = "days";
-    }
-    if(monthValue == 1){
-        monthText.innerHTML = "month";
-    }else{
-        monthText.innerHTML = "months";
-    }
-    if(yearValue == 1){
-        yearText.innerHTML = "year";
-    }else{
-        yearText.innerHTML = "years";
-    }
-    dayNum.innerHTML = dayValue;
-    monthNum.innerHTML = monthValue;
-    yearNum.innerHTML = yearValue;
-}
-function validate(){
-    let dayValid = false;
-    let monthValid = false;
-    let yearValid = false;
-    if(day.value === ""){
-        dayValid = false;
-        dayError.innerHTML = "This field is required";
-    } else if(day.value != day.value.match(numsRegex)){
-        dayValid = false;
-        dayError.innerHTML = "Invalid day";
-    } else if(day.value < 1 || day.value > 31){
-        dayValid = false;
-        dayError.innerHTML = "Invalid day";
-    } else {
-        dayValid = true;
-        dayError.innerHTML = "";
-    }
-    if(month.value === ""){
-        monthValid = false;
-        monthError.innerHTML = "This field is required";
-    } else if(month.value != month.value.match(numsRegex)){
-        monthValid = false;
-        monthError.innerHTML = "Invalid month";
-    } else if(month.value < 1 || month.value > 12){
-        monthValid = false;
-        monthError.innerHTML = "Invalid month";
-    } else {
-        monthValid = true;
-        monthError.innerHTML = "";
-    }
-    if(year.value === ""){
-        yearValid = false;
-        yearError.innerHTML = "This field is required";
-    } else if(year.value != year.value.match(numsRegex)){
-        yearValid = false;
-        yearError.innerHTML = "Invalid year";
-    } else if(year.value < 1900 || year.value > currentYear){
-        yearValid = false;
-        yearError.innerHTML = "Invalid year";
-    } else {
-        yearValid = true;
-        yearError.innerHTML = "";
-    }
-    if(dayValid && monthValid && yearValid == true){
-    age();
-    }
-}
 
-day.addEventListener("input", days);
-month.addEventListener("input", months);
-year.addEventListener("input", years);
-form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    validate();
-});
+    function years() {
+        if (year.value === "") {
+            yearError.textContent = "This field is required";
+        }
+        else {
+            if (year.value.match(numsRegex) === null) {
+                yearError.textContent = "Invalid year";
+            }
+            else {
+                if (Number(year.value) < 1900 || Number(year.value) > currentYear) {
+                    yearError.textContent = "Invalid year";
+                }
+                else {
+                    yearError.textContent = "";
+                }
+            }
+        }
+    }
+
+    function age() {
+        let dayValue;
+        let monthValue;
+        let yearValue = currentYear - Number(year.value);
+        if (currentMonth < Number(month.value)) {
+            yearValue--;
+            monthValue = 12 - Number(month.value) + currentMonth;
+        }
+        else {
+            monthValue = currentMonth - Number(month.value);
+        }
+        if (currentDay < Number(day.value)) {
+            monthValue--;
+            dayValue = monthsLen[currentMonth - 2] - Number(day.value) + currentDay;
+        }
+        else {
+            dayValue = currentDay - Number(day.value);
+        }
+        if (dayValue === 1) {
+            dayText.textContent = "day";
+        }
+        else {
+            dayText.textContent = "days";
+        }
+        if (monthValue === 1) {
+            monthText.textContent = "month";
+        }
+        else {
+            monthText.textContent = "months";
+        }
+        if (yearValue === 1) {
+            yearText.textContent = "year";
+        }
+        else {
+            yearText.textContent = "years";
+        }
+        dayNum.textContent = dayValue.toString();
+        monthNum.textContent = monthValue.toString();
+        yearNum.textContent = yearValue.toString();
+    }
+
+    function validate() {
+        let dayValid = false;
+        let monthValid = false;
+        let yearValid = false;
+        if (day.value === "") {
+            dayValid = false;
+            dayError.textContent = "This field is required";
+        }
+        else if (day.value.match(numsRegex) === null) {
+            dayValid = false;
+            dayError.textContent = "Invalid day";
+        }
+        else if (Number(day.value) < 1 || Number(day.value) > 31) {
+            dayValid = false;
+            dayError.textContent = "Invalid day";
+        }
+        else {
+            dayValid = true;
+            dayError.textContent = "";
+        }
+        if (month.value === "") {
+            monthValid = false;
+            monthError.textContent = "This field is required";
+        }
+        else if (month.value.match(numsRegex) === null) {
+            monthValid = false;
+            monthError.textContent = "Invalid month";
+        }
+        else if (Number(month.value) < 1 || Number(month.value) > 12) {
+            monthValid = false;
+            monthError.textContent = "Invalid month";
+        }
+        else {
+            monthValid = true;
+            monthError.textContent = "";
+        }
+        if (year.value === "") {
+            yearValid = false;
+            yearError.textContent = "This field is required";
+        }
+        else if (year.value.match(numsRegex) === null ||
+            year.value !== year.value.match(numsRegex)?.[0]) {
+            yearValid = false;
+            yearError.textContent = "Invalid year";
+        }
+        else if (Number(year.value) < 1900 || Number(year.value) > currentYear) {
+            yearValid = false;
+            yearError.textContent = "Invalid year";
+        }
+        else {
+            yearValid = true;
+            yearError.textContent = "";
+        }
+        if (dayValid && monthValid && yearValid) {
+            age();
+        }
+    }
+    day.addEventListener("input", days);
+    month.addEventListener("input", months);
+    year.addEventListener("input", years);
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        validate();
+    });
+};
