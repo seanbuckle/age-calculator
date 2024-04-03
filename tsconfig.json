@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "commonjs",
+    "outDir": "./script",
+    "strict": true,
+    "esModuleInterop": true
+  },
+  "files": ["./script/script.ts"]
+}
