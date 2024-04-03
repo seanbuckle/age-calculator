@@ -41,7 +41,8 @@ body {
   display: grid;
   grid-template-rows: 1fr auto;
   background-color: var(--off-white);
-  font: var(--font-weight-regular) var(--body-font-size) / normal var(--font-family);
+  font: var(--font-weight-regular) var(--body-font-size) / normal
+    var(--font-family);
 }
 
 .site-main {
@@ -49,6 +50,16 @@ body {
   place-items: center;
   padding-inline: 1rem;
   container: card / inline-size;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 
 .ac-card {
@@ -94,7 +105,8 @@ body {
     padding-inline-start: 1rem;
     border: 1px solid var(--light-grey);
     border-radius: 4px;
-    font: var(--font-weight-regular) var(--input-font-size) / normal var(--font-family);
+    font: var(--font-weight-regular) var(--input-font-size) / normal
+      var(--font-family);
     caret-color: var(--purple);
 
     &:focus-visible {
@@ -150,7 +162,8 @@ body {
 
   &__age-result {
     inline-size: 100%;
-    font: var(--font-weight-extra-bold) var(--font-style-italic) var(--result-font-size) / normal var(--font-family);
+    font: var(--font-weight-extra-bold) var(--font-style-italic)
+      var(--result-font-size) / normal var(--font-family);
     letter-spacing: -1.12px;
 
     &--number {
