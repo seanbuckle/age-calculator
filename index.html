@@ -1,60 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Calculate your age using this simple age calculator tool." />
+  <meta name="keywords" content="age calculator, calculate age, birthdate calculator" />
+  <meta name="author" content="Sean Buckle" />
   <link rel="icon" type="image/png" href="favicon-32x32.png" />
   <link rel="stylesheet" href="style/style.min.css" />
-  <title>Age calculator</title>
-  <script defer src="script/script.min.js"></script>
+  <title id="header-title">Age calculator</title>
+  <script defer src="./script/script.min.js"></script>
 </head>
 
 <body>
+  <header class="site-header" aria-labelledby="header-title">
+    <button class="site-header__theme-toggle" id="theme-toggle">
+    </button>
+  </header>
   <main class="site-main">
-    <section class="ac-card">
+    <div class="ac-card">
       <form id="form" class="ac-card__form">
-        <section class="ac-card__input-group">
-          <section class="ac-card__input-group--column">
-            <label for="day" class="ac-card__input-label ac-card__input-label--day">Day</label>
-            <input type="number" name="day" id="day" class="ac-card__date-input ac-card__date-input--day"
-              placeholder="DD" />
-            <label for="day" id="day-error" class="ac-card__error-label"></label>
-          </section>
-          <section class="ac-card__input-group--column">
-            <label for="month" class="ac-card__input-label ac-card__input-label--month">Month</label>
-            <input type="number" name="month" id="month" class="ac-card__date-input ac-card__date-input--month"
-              placeholder="MM" />
-            <label for="month" id="month-error" class="ac-card__error-label"></label>
-          </section>
-          <section class="ac-card__input-group--column">
-            <label for="year" class="ac-card__input-label ac-card__input-label--year">Year</label>
-            <input type="number" name="year" id="year" class="ac-card__date-input ac-card__date-input--year"
-              placeholder="YYYY" />
-            <label for="year" id="year-error" class="ac-card__error-label"></label>
-          </section>
-        </section>
-        <section class="ac-card__btn-group">
+        <div class="ac-card__input-group">
+          <div class="ac-card__input-column">
+            <label for="day" id="day-label" class="ac-card__input-label" aria-labelledby="day-label">Day</label>
+            <input type="number" name="day" id="day" class="ac-card__date-input" placeholder="DD" required
+              aria-required="true" aria-label="Day" />
+            <label id="day-error" class="ac-card__error-label" aria-live="polite" aria-labelledby="day-error"></label>
+          </div>
+          <div class="ac-card__input-column">
+            <label for="month" id="month-label" class="ac-card__input-label" aria-labelledby="month-label">Month</label>
+            <input type="number" name="month" id="month" class="ac-card__date-input" placeholder="MM" required
+              aria-required="true" aria-label="Month" />
+            <label id="month-error" class="ac-card__error-label" aria-live="polite"
+              aria-labelledby="month-error"></label>
+          </div>
+          <div class="ac-card__input-column">
+            <label for="year" id="year-label" class="ac-card__input-label" aria-labelledby="year-label">Year</label>
+            <input type="number" name="year" id="year" class="ac-card__date-input" placeholder="YYYY" required
+              aria-required="true" aria-label="Year" />
+            <label id="year-error" class="ac-card__error-label" aria-live="polite" aria-labelledby="year-error"></label>
+          </div>
+        </div>
+        <div class="ac-card__btn-group">
           <hr class="ac-card__hr-line" />
-          <button type="submit" class="ac-card__btn" id="submit-btn">
-            <img class="ac-card__btn-icon" src="images/icon-arrow.svg" alt="arrow icon" />
+          <button type="submit" class="ac-card__btn">
+            <img class="ac-card__btn-icon" src="images/arrow-icon.svg" alt="arrow icon" />
           </button>
           <hr class="ac-card__hr-line ac-card__hr-line--right" />
-        </section>
+        </div>
       </form>
-      <section class="ac-card__age-result">
-        <p><span class="ac-card__age-result--number" id="year-num">--</span> <span id="year-txt">years</span></p>
-        <p><span class="ac-card__age-result--number" id="month-num">--</span> <span id="month-txt">months</span></p>
-        <p><span class="ac-card__age-result--number" id="day-num">--</span> <span id="day-txt">days</span></p>
-      </section>
-    </section>
+      </form>
+      <div class="ac-card__age-result">
+        <p><span class="ac-card__age-number" id="year-num">--</span> <span id="year-txt">years</span></p>
+        <p><span class="ac-card__age-number" id="month-num">--</span> <span id="month-txt">months</span>
+        </p>
+        <p><span class="ac-card__age-number" id="day-num">--</span> <span id="day-txt">days</span></p>
+      </div>
+    </div>
   </main>
   <footer class="attribution">
     <p>
       Challenge by
-      <a class="attribution__link" href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend
-        Mentor</a>. Coded by <a class="attribution__link" href="https://www.frontendmentor.io/profile/seanbuckle"
-        target="_blank">Sean Buckle</a>.
+      <a class="attribution__link" href="https://www.frontendmentor.io/challenges/age-calculator-app-dF9DFFpj-Q"
+        target="_blank" rel="noopener noreferrer">Frontend
+        Mentor</a>. Coded by <a class="attribution__link" href="https://github.com/seanbuckle/age-calculator"
+        target="_blank" rel="noopener noreferrer">Sean Buckle</a>.
     </p>
   </footer>
 </body>
