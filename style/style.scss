@@ -7,42 +7,138 @@
   margin-inline: 0;
   border-block: 0;
   border-inline: 0;
+  outline: none;
   box-sizing: border-box;
 }
 
 :root {
-  /* colors */
-  /* primary */
-  --purple: hsl(259, 100%, 65%);
-  --light-red: hsl(0, 100%, 67%);
-  /* neutral */
-  --white: hsl(0, 0%, 100%);
-  --off-white: hsl(0, 0%, 94%);
-  --light-grey: hsl(0, 0%, 86%);
-  --smokey-grey: hsl(0, 0%, 44%);
-  --off-black: hsl(0, 0%, 8%);
   /* font */
   --font-weight-regular: 400;
   --font-weight-bold: 700;
   --font-weight-extra-bold: 800;
   --font-style-italic: italic;
-  --heading-l-font-size: 104px;
-  --result-font-size: 3.5rem;
-  --heading-s-font-size: 1.25rem;
+  --result-font-size: clamp(3.5rem, 9vw, 6.5rem);
   --body-font-size: 1rem;
   --label-font-size: 0.875rem;
-  --input-font-size: 1.25rem;
-  --attribution-font-size: 0.688rem;
-  --font-family: Poppins, sans-serif;
+  --input-font-size: clamp(1.25rem, 3vw, 2rem);
+  --attribution-font-size: 0.75rem;
+  --font-family: "Poppins", sans-serif;
+}
+
+html,
+html[theme="light"] {
+  /* colors */
+  /* primary */
+  --clr-primary: oklch(58.63% 0.2661 291.35);
+  --clr-primary-hover: oklch(88.63% 0.0661 291.35);
+  --clr-error: oklch(68.43% 0.2596 24.302873247614443);
+  /* neutral */
+  --clr-surface-1: oklch(95.42% 0 0);
+  --clr-surface-2: oklch(100% 0 0);
+  --clr-line: oklch(89.23% 0 0);
+  --clr-text: oklch(19.57% 0 0);
+  --clr-tooltip: oklch(39.57% 0 0);
+  --clr-label: oklch(54.59% 0 0);
+  --clr-btn-hover: oklch(19.3% 0 0);
+  transition: color 500ms ease-in-out, background-color 500ms ease-in-out;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* colors */
+    /* primary */
+    --clr-primary: oklch(68.63% 0.1954 291.35);
+    --clr-primary-hover: oklch(28.63% 0.1651 291.35);
+    --clr-error: oklch(78.43% 0.161 24.302873247614443);
+    /* neutral */
+    --clr-surface-1: oklch(18.74% 0.012 300.42);
+    --clr-surface-2: oklch(22.65% 0.01 303.71);
+    --clr-line: oklch(44.615% 0 0);
+    --clr-text: oklch(100% 0 0);
+    --clr-tooltip: oklch(95% 0 0);
+    --clr-label: oklch(71% 0 0);
+    --clr-btn-hover: oklch(28.59% 0.013 298.63);
+  }
+}
+
+html[theme="dark"] {
+  /* colors */
+  /* primary */
+  --clr-primary: oklch(68.63% 0.1954 291.35);
+  --clr-primary-hover: oklch(28.63% 0.1651 291.35);
+  --clr-error: oklch(78.43% 0.161 24.302873247614443);
+  /* neutral */
+  --clr-surface-1: oklch(18.74% 0.012 300.42);
+  --clr-surface-2: oklch(22.65% 0.01 303.71);
+  --clr-line: oklch(44.615% 0 0);
+  --clr-text: oklch(100% 0 0);
+  --clr-tooltip: oklch(95% 0 0);
+  --clr-label: oklch(71% 0 0);
+  --clr-btn-hover: oklch(28.59% 0.013 298.63);
 }
 
 body {
   min-block-size: 100dvh;
   display: grid;
-  grid-template-rows: 1fr auto;
-  background-color: var(--off-white);
+  grid-template-rows: auto 1fr auto;
+  background-color: var(--clr-surface-1);
   font: var(--font-weight-regular) var(--body-font-size) / normal
     var(--font-family);
+  color: var(--clr-text);
+}
+
+.site-header {
+  height: 4rem;
+  padding-inline-end: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  &__theme-toggle {
+    inline-size: 3rem;
+    block-size: 3rem;
+    border-radius: 50%;
+    position: relative;
+    display: grid;
+    place-items: center;
+    background-color: transparent;
+    cursor: pointer;
+    & > svg {
+      fill: var(--clr-text);
+    }
+    &:hover {
+      background-color: var(--clr-primary-hover);
+      & > svg {
+        fill: var(--clr-primary);
+      }
+      &::after {
+        display: flex;
+        animation: tooltip 200ms ease,
+          tooltip 200ms ease 1700ms reverse forwards;
+        @keyframes tooltip {
+          0% {
+            scale: 0;
+          }
+          100% {
+            scale: 1;
+          }
+        }
+      }
+    }
+    &::after {
+      min-inline-size: max-content;
+      block-size: 1.5rem;
+      padding-inline: 0.5rem;
+      border-radius: 0.25rem;
+      position: absolute;
+      bottom: calc(-4px + -1.5rem);
+      right: 0;
+      display: none;
+      align-items: center;
+      content: attr(tooltip);
+      background-color: var(--clr-tooltip);
+      color: var(--clr-surface-2);
+    }
+  }
 }
 
 .site-main {
@@ -63,18 +159,16 @@ input[type="number"] {
 }
 
 .ac-card {
-  inline-size: min(100%, 840px);
+  inline-size: min(100%, 52.5rem);
+  max-block-size: 42.5rem;
   padding-block: 3rem;
   padding-inline: 1.5rem;
-  border-start-start-radius: 24px;
-  border-start-end-radius: 24px;
-  border-end-start-radius: 24px;
-  border-end-end-radius: 200px;
+  border-radius: 1.5rem 1.5rem 6.25rem 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 2rem;
-  background-color: var(--white);
+  background-color: var(--clr-surface-2);
 
   &__form {
     inline-size: 100%;
@@ -84,16 +178,17 @@ input[type="number"] {
     gap: 2rem;
   }
 
-  &__input-group {
-    inline-size: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: 1rem;
-
-    &--column {
+  &__input {
+    &-group {
+      inline-size: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      gap: 1rem;
+    }
+    &-column {
       inline-size: calc(33.3% - 11px);
-      max-inline-size: 160px;
+      max-inline-size: 10rem;
       display: flex;
       flex-direction: column;
     }
@@ -103,14 +198,23 @@ input[type="number"] {
     block-size: 3.375rem;
     padding-block: 0.75rem;
     padding-inline-start: 1rem;
-    border: 1px solid var(--light-grey);
+    border: 1px solid var(--clr-line);
     border-radius: 4px;
     font: var(--font-weight-regular) var(--input-font-size) / normal
       var(--font-family);
-    caret-color: var(--purple);
+    caret-color: var(--clr-primary);
+    background-color: var(--clr-surface-2);
+    color: var(--clr-text);
 
     &:focus-visible {
-      outline-color: var(--purple);
+      border-color: var(--clr-primary);
+    }
+    &--error {
+      border-color: var(--clr-error);
+      caret-color: var(--clr-error);
+      &:focus-visible {
+        border-color: var(--clr-error);
+      }
     }
   }
 
@@ -118,14 +222,18 @@ input[type="number"] {
     font-size: var(--label-font-size);
     font-weight: var(--font-weight-regular);
     text-transform: uppercase;
-    color: var(--smokey-grey);
+    color: var(--clr-label);
+    &--error {
+      color: var(--clr-error);
+    }
   }
 
   &__error-label {
+    height: 1.313rem;
     font-size: var(--label-font-size);
     font-weight: var(--font-weight-regular);
     font-style: var(--font-style-italic);
-    color: var(--light-red);
+    color: var(--clr-error);
     margin-block-start: 0.5rem;
   }
 
@@ -138,7 +246,7 @@ input[type="number"] {
   &__hr-line {
     inline-size: calc(50% - 32px);
     block-size: 1px;
-    background-color: var(--light-grey);
+    background-color: var(--clr-line);
   }
 
   &__btn {
@@ -148,10 +256,10 @@ input[type="number"] {
     border-start-end-radius: 50%;
     border-end-start-radius: 50%;
     border-end-end-radius: 50%;
-    background-color: var(--purple);
-
+    background-color: var(--clr-primary);
+    cursor: pointer;
     &:hover {
-      background-color: var(--off-black);
+      background-color: var(--clr-btn-hover);
     }
   }
 
@@ -160,26 +268,42 @@ input[type="number"] {
     block-size: 1.5rem;
   }
 
-  &__age-result {
-    inline-size: 100%;
-    font: var(--font-weight-extra-bold) var(--font-style-italic)
-      var(--result-font-size) / normal var(--font-family);
-    letter-spacing: -1.12px;
-
-    &--number {
-      color: var(--purple);
+  &__age {
+    &-result {
+      inline-size: 100%;
+      font: var(--font-weight-extra-bold) var(--font-style-italic)
+        var(--result-font-size) / 110% var(--font-family);
+      letter-spacing: -1.12px;
+    }
+    &-number {
+      color: var(--clr-primary);
     }
   }
 }
 
 @container card (inline-size > 561px) {
   .ac-card {
+    padding-block: 3.5rem;
+    padding-inline: 3.5rem;
+    border-radius: 1.5rem 1.5rem 12.5rem 1.5rem;
+    gap: 0;
+    &__form {
+      gap: 0;
+    }
     &__hr-line {
       inline-size: calc(100% - 64px);
 
       &--right {
         display: none;
       }
+    }
+    &__btn {
+      inline-size: 6rem;
+      block-size: 6rem;
+    }
+    &__btn-icon {
+      inline-size: 2.75rem;
+      block-size: 2.75rem;
     }
   }
 }
@@ -191,7 +315,7 @@ input[type="number"] {
   place-items: center;
   font-size: var(--attribution-font-size);
   &__link {
-    color: var(--purple);
+    color: var(--clr-primary);
     text-decoration: none;
     &:hover {
       text-decoration: underline;
