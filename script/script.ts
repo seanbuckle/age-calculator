@@ -1,41 +1,20 @@
 window.onload = () => {
-  const form: HTMLFormElement = document.getElementById(
-    "form"
-  ) as HTMLFormElement;
-  const day: HTMLInputElement = document.getElementById(
-    "day"
-  ) as HTMLInputElement;
-  const month: HTMLInputElement = document.getElementById(
-    "month"
-  ) as HTMLInputElement;
-  const year: HTMLInputElement = document.getElementById(
-    "year"
-  ) as HTMLInputElement;
-  const dayError: HTMLElement = document.getElementById(
-    "day-error"
-  ) as HTMLElement;
-  const monthError: HTMLElement = document.getElementById(
-    "month-error"
-  ) as HTMLElement;
-  const yearError: HTMLElement = document.getElementById(
-    "year-error"
-  ) as HTMLElement;
-  const dayNum: HTMLElement = document.getElementById("day-num") as HTMLElement;
-  const monthNum: HTMLElement = document.getElementById(
-    "month-num"
-  ) as HTMLElement;
-  const yearNum: HTMLElement = document.getElementById(
-    "year-num"
-  ) as HTMLElement;
-  const dayText: HTMLElement = document.getElementById(
-    "day-txt"
-  ) as HTMLElement;
-  const monthText: HTMLElement = document.getElementById(
-    "month-txt"
-  ) as HTMLElement;
-  const yearText: HTMLElement = document.getElementById(
-    "year-txt"
-  ) as HTMLElement;
+  const form = document.getElementById("form") as HTMLFormElement;
+  const day = document.getElementById("day") as HTMLInputElement;
+  const month = document.getElementById("month") as HTMLInputElement;
+  const year = document.getElementById("year") as HTMLInputElement;
+  const dayError = document.getElementById("day-error") as HTMLLabelElement;
+  const monthError = document.getElementById("month-error") as HTMLLabelElement;
+  const yearError = document.getElementById("year-error") as HTMLLabelElement;
+  const dayLabel = document.getElementById("day-label") as HTMLLabelElement;
+  const monthLabel = document.getElementById("month-label") as HTMLLabelElement;
+  const yearLabel = document.getElementById("year-label") as HTMLLabelElement;
+  const dayNum = document.getElementById("day-num") as HTMLElement;
+  const monthNum = document.getElementById("month-num") as HTMLElement;
+  const yearNum = document.getElementById("year-num") as HTMLElement;
+  const dayText = document.getElementById("day-txt") as HTMLElement;
+  const monthText = document.getElementById("month-txt") as HTMLElement;
+  const yearText = document.getElementById("year-txt") as HTMLElement;
   const currentDate: Date = new Date();
   const currentDay: number = currentDate.getDate();
   const currentMonth: number = currentDate.getMonth() + 1;
@@ -45,14 +24,22 @@ window.onload = () => {
 
   function days(): void {
     if (day.value === "") {
+      dayLabel.classList.add("ac-card__input-label--error");
+      day.classList.add("ac-card__date-input--error");
       dayError.textContent = "This field is required";
     } else {
       if (day.value.match(numsRegex) === null) {
-        dayError.textContent = "Invalid day";
+        dayLabel.classList.add("ac-card__input-label--error");
+        day.classList.add("ac-card__date-input--error");
+        dayError.textContent = "Must be a valid day";
       } else {
         if (Number(day.value) < 1 || Number(day.value) > 31) {
-          dayError.textContent = "Invalid day";
+          dayLabel.classList.add("ac-card__input-label--error");
+          day.classList.add("ac-card__date-input--error");
+          dayError.textContent = "Must be a valid day";
         } else {
+          dayLabel.classList.remove("ac-card__input-label--error");
+          day.classList.remove("ac-card__date-input--error");
           dayError.textContent = "";
         }
       }
@@ -61,14 +48,22 @@ window.onload = () => {
 
   function months(): void {
     if (month.value === "") {
+      monthLabel.classList.add("ac-card__input-label--error");
+      month.classList.add("ac-card__date-input--error");
       monthError.textContent = "This field is required";
     } else {
       if (month.value.match(numsRegex) === null) {
-        monthError.textContent = "Invalid month";
+        monthLabel.classList.add("ac-card__input-label--error");
+        month.classList.add("ac-card__date-input--error");
+        monthError.textContent = "Must be a valid month";
       } else {
         if (Number(month.value) < 1 || Number(month.value) > 12) {
-          monthError.textContent = "Invalid month";
+          monthLabel.classList.add("ac-card__input-label--error");
+          month.classList.add("ac-card__date-input--error");
+          monthError.textContent = "Must be a valid month";
         } else {
+          monthLabel.classList.remove("ac-card__input-label--error");
+          month.classList.remove("ac-card__date-input--error");
           monthError.textContent = "";
         }
       }
@@ -77,17 +72,184 @@ window.onload = () => {
 
   function years(): void {
     if (year.value === "") {
+      yearLabel.classList.add("ac-card__input-label--error");
+      year.classList.add("ac-card__date-input--error");
       yearError.textContent = "This field is required";
     } else {
       if (year.value.match(numsRegex) === null) {
-        yearError.textContent = "Invalid year";
+        yearLabel.classList.add("ac-card__input-label--error");
+        year.classList.add("ac-card__date-input--error");
+        yearError.textContent = "Must be a valid year";
       } else {
-        if (Number(year.value) < 1900 || Number(year.value) > currentYear) {
-          yearError.textContent = "Invalid year";
+        if (Number(year.value) < 1) {
+          yearLabel.classList.add("ac-card__input-label--error");
+          year.classList.add("ac-card__date-input--error");
+          yearError.textContent = "Must be a valid year";
         } else {
+          if (Number(year.value) > currentYear) {
+            yearLabel.classList.add("ac-card__input-label--error");
+            year.classList.add("ac-card__date-input--error");
+            yearError.textContent = "Must be in the past";
+          } else {
+            yearLabel.classList.remove("ac-card__input-label--error");
+            year.classList.remove("ac-card__date-input--error");
+            yearError.textContent = "";
+          }
+        }
+      }
+    }
+  }
+  /**
+   * Validates the day, month, and year inputs and displays error messages if the inputs are invalid.
+   * If the inputs are valid, it calls the `age` function.
+   */
+  function validate(): void {
+    let dayValid: boolean = false;
+    let monthValid: boolean = false;
+    let yearValid: boolean = false;
+    let leapYear: boolean = false;
+    let dateValid: boolean = false;
+    if (day.value === "") {
+      dayValid = false;
+      dayLabel.classList.add("ac-card__input-label--error");
+      day.classList.add("ac-card__date-input--error");
+      dayError.textContent = "This field is required";
+    } else {
+      if (day.value.match(numsRegex) === null) {
+        dayValid = false;
+        dayLabel.classList.add("ac-card__input-label--error");
+        day.classList.add("ac-card__date-input--error");
+        dayError.textContent = "Must be a valid day";
+      } else {
+        if (Number(day.value) < 1 || Number(day.value) > 31) {
+          dayValid = false;
+          dayLabel.classList.add("ac-card__input-label--error");
+          day.classList.add("ac-card__date-input--error");
+          dayError.textContent = "Must be a valid day";
+        } else {
+          dayValid = true;
+          dayLabel.classList.remove("ac-card__input-label--error");
+          day.classList.remove("ac-card__date-input--error");
+          dayError.textContent = "";
+        }
+      }
+    }
+    if (month.value === "") {
+      monthValid = false;
+      monthLabel.classList.add("ac-card__input-label--error");
+      month.classList.add("ac-card__date-input--error");
+      monthError.textContent = "This field is required";
+    } else {
+      if (month.value.match(numsRegex) === null) {
+        monthValid = false;
+        monthLabel.classList.add("ac-card__input-label--error");
+        month.classList.add("ac-card__date-input--error");
+        monthError.textContent = "Must be a valid month";
+      } else {
+        if (Number(month.value) < 1 || Number(month.value) > 12) {
+          monthValid = false;
+          monthLabel.classList.add("ac-card__input-label--error");
+          month.classList.add("ac-card__date-input--error");
+          monthError.textContent = "Must be a valid month";
+        } else {
+          monthValid = true;
+          monthLabel.classList.remove("ac-card__input-label--error");
+          month.classList.remove("ac-card__date-input--error");
+          monthError.textContent = "";
+        }
+      }
+    }
+    if (year.value === "") {
+      yearValid = false;
+      yearLabel.classList.add("ac-card__input-label--error");
+      year.classList.add("ac-card__date-input--error");
+      yearError.textContent = "This field is required";
+    } else {
+      if (
+        year.value.match(numsRegex) === null ||
+        year.value !== year.value.match(numsRegex)?.[0]
+      ) {
+        yearValid = false;
+        yearLabel.classList.add("ac-card__input-label--error");
+        year.classList.add("ac-card__date-input--error");
+        yearError.textContent = "Must be a valid year";
+      } else {
+        if (Number(year.value) < 1) {
+          yearValid = false;
+          yearLabel.classList.add("ac-card__input-label--error");
+          year.classList.add("ac-card__date-input--error");
+          yearError.textContent = "Must be a valid year";
+        } else if (Number(year.value) > currentYear) {
+          yearValid = false;
+          yearLabel.classList.add("ac-card__input-label--error");
+          year.classList.add("ac-card__date-input--error");
+          yearError.textContent = "Must be in the past";
+        } else {
+          yearValid = true;
+          yearLabel.classList.remove("ac-card__input-label--error");
+          year.classList.remove("ac-card__date-input--error");
           yearError.textContent = "";
         }
       }
+    }
+    if (
+      Number(day.value) > currentDay &&
+      Number(month.value) >= currentMonth &&
+      Number(year.value) >= currentYear
+    ) {
+      dayValid = false;
+      monthValid = false;
+      yearValid = false;
+      dayLabel.classList.add("ac-card__input-label--error");
+      day.classList.add("ac-card__date-input--error");
+      monthLabel.classList.add("ac-card__input-label--error");
+      month.classList.add("ac-card__date-input--error");
+      yearLabel.classList.add("ac-card__input-label--error");
+      year.classList.add("ac-card__date-input--error");
+      dayError.textContent = "Must be in the past";
+    }
+    if (dayValid === true && monthValid === true && yearValid === true) {
+      if (Number(year.value) % 4 === 0) {
+        if (Number(year.value) % 100 === 0) {
+          if (Number(year.value) % 400 === 0) {
+            leapYear = true;
+          } else {
+            leapYear = false;
+          }
+        } else {
+          leapYear = true;
+        }
+      } else {
+        leapYear = false;
+      }
+
+      if (leapYear) {
+        monthsLen[1] = 29;
+      } else {
+        monthsLen[1] = 28;
+      }
+      if (Number(day.value) > monthsLen[Number(month.value) - 1]) {
+        dateValid = false;
+        dayError.textContent = "Must be a valid date";
+        dayLabel.classList.add("ac-card__input-label--error");
+        day.classList.add("ac-card__date-input--error");
+        monthLabel.classList.add("ac-card__input-label--error");
+        month.classList.add("ac-card__date-input--error");
+        yearLabel.classList.add("ac-card__input-label--error");
+        year.classList.add("ac-card__date-input--error");
+      } else {
+        dateValid = true;
+        dayError.textContent = "";
+        dayLabel.classList.remove("ac-card__input-label--error");
+        day.classList.remove("ac-card__date-input--error");
+        monthLabel.classList.remove("ac-card__input-label--error");
+        month.classList.remove("ac-card__date-input--error");
+        yearLabel.classList.remove("ac-card__input-label--error");
+        year.classList.remove("ac-card__date-input--error");
+      }
+    }
+    if (dateValid === true) {
+      age();
     }
   }
 
@@ -95,6 +257,10 @@ window.onload = () => {
     let dayValue: number;
     let monthValue: number;
     let yearValue: number = currentYear - Number(year.value);
+    const counters: NodeListOf<Element> = document.querySelectorAll(
+      ".ac-card__age-number"
+    );
+    const interval: number = 100;
     if (currentMonth < Number(month.value)) {
       yearValue--;
       monthValue = 12 - Number(month.value) + currentMonth;
@@ -122,59 +288,31 @@ window.onload = () => {
     } else {
       yearText.textContent = "years";
     }
-    dayNum.textContent = dayValue.toString();
-    monthNum.textContent = monthValue.toString();
-    yearNum.textContent = yearValue.toString();
-  }
 
-  function validate(): void {
-    let dayValid: boolean = false;
-    let monthValid: boolean = false;
-    let yearValid: boolean = false;
-    if (day.value === "") {
-      dayValid = false;
-      dayError.textContent = "This field is required";
-    } else if (day.value.match(numsRegex) === null) {
-      dayValid = false;
-      dayError.textContent = "Invalid day";
-    } else if (Number(day.value) < 1 || Number(day.value) > 31) {
-      dayValid = false;
-      dayError.textContent = "Invalid day";
-    } else {
-      dayValid = true;
-      dayError.textContent = "";
+    for (let d = 0; d <= dayValue; d++) {
+      days(d);
     }
-    if (month.value === "") {
-      monthValid = false;
-      monthError.textContent = "This field is required";
-    } else if (month.value.match(numsRegex) === null) {
-      monthValid = false;
-      monthError.textContent = "Invalid month";
-    } else if (Number(month.value) < 1 || Number(month.value) > 12) {
-      monthValid = false;
-      monthError.textContent = "Invalid month";
-    } else {
-      monthValid = true;
-      monthError.textContent = "";
+
+    function days(day: number): void {
+      setTimeout(() => {
+        dayNum.textContent = day.toString();
+      }, interval * day);
     }
-    if (year.value === "") {
-      yearValid = false;
-      yearError.textContent = "This field is required";
-    } else if (
-      year.value.match(numsRegex) === null ||
-      year.value !== year.value.match(numsRegex)?.[0]
-    ) {
-      yearValid = false;
-      yearError.textContent = "Invalid year";
-    } else if (Number(year.value) < 1900 || Number(year.value) > currentYear) {
-      yearValid = false;
-      yearError.textContent = "Invalid year";
-    } else {
-      yearValid = true;
-      yearError.textContent = "";
+    for (let m = 0; m <= monthValue; m++) {
+      months(m);
     }
-    if (dayValid && monthValid && yearValid) {
-      age();
+    function months(month: number): void {
+      setTimeout(() => {
+        monthNum.textContent = month.toString();
+      }, interval * month);
+    }
+    for (let y = 0; y <= yearValue; y++) {
+      years(y);
+    }
+    function years(year: number): void {
+      setTimeout(() => {
+        yearNum.textContent = year.toString();
+      }, interval * year);
     }
   }
 
@@ -185,4 +323,75 @@ window.onload = () => {
     e.preventDefault();
     validate();
   });
+
+  const root = document.documentElement as HTMLElement;
+  const themeToggle = document.getElementById(
+    "theme-toggle"
+  ) as HTMLButtonElement;
+  const darkModeIcon = `<svg xmlns="http://www.w3.org/2000/svg" height="1.5rem" viewBox="0 -960 960 960" width="1.5rem"><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Zm0-80q88 0 158-48.5T740-375q-20 5-40 8t-40 3q-123 0-209.5-86.5T364-660q0-20 3-40t8-40q-78 32-126.5 102T200-480q0 116 82 198t198 82Zm-10-270Z"/></svg>`;
+  /**
+   * SVG icon representing the light mode.
+   */
+  const lightModeIcon = `<svg xmlns="http://www.w3.org/2000/svg" height="1.5rem" viewBox="0 -960 960 960" width="1.5rem"><path d="M480-360q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35Zm0 80q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480q0 83-58.5 141.5T480-280ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Zm326-268Z"/></svg>`;
+  let local = localStorage.getItem("theme");
+  const isDark = window.matchMedia("(prefers-color-scheme: dark)");
+  const lightTooltip = "Switch to dark mode";
+  const darkTooltip = "Switch to light mode";
+  function updateTheme() {
+    if (local === "dark") {
+      themeToggle.innerHTML = lightModeIcon;
+      themeToggle.setAttribute("tooltip", darkTooltip);
+      root.setAttribute("theme", local ?? "");
+    } else {
+      themeToggle.innerHTML = darkModeIcon;
+      root.setAttribute("theme", local ?? "");
+      themeToggle.setAttribute("tooltip", lightTooltip);
+    }
+  }
+
+  if (local === null) {
+    if (isDark.matches) {
+      themeToggle.innerHTML = lightModeIcon;
+      themeToggle.setAttribute("tooltip", darkTooltip);
+    } else {
+      themeToggle.innerHTML = darkModeIcon;
+      themeToggle.setAttribute("tooltip", lightTooltip);
+    }
+    isDark.addEventListener("change", () => {
+      if (isDark.matches) {
+        themeToggle.innerHTML = lightModeIcon;
+        themeToggle.setAttribute("tooltip", darkTooltip);
+      } else {
+        themeToggle.innerHTML = darkModeIcon;
+        themeToggle.setAttribute("tooltip", lightTooltip);
+      }
+    });
+  } else {
+    updateTheme();
+  }
+
+  function toggleTheme() {
+    if (local === null) {
+      if (isDark.matches) {
+        local = "light";
+      } else {
+        local = "dark";
+      }
+    } else {
+      if (local === "dark") {
+        local = "light";
+      } else {
+        local = "dark";
+      }
+    }
+    localStorage.setItem("theme", local);
+    root.setAttribute("theme", local);
+    themeToggle.innerHTML = local === "dark" ? lightModeIcon : darkModeIcon;
+    themeToggle.setAttribute(
+      "tooltip",
+      local === "dark" ? darkTooltip : lightTooltip
+    );
+  }
+
+  themeToggle.addEventListener("click", toggleTheme);
 };
