@@ -187,11 +187,11 @@ input[type=number] {
   flex-direction: column;
 }
 .ac-card__date-input {
-  block-size: 3.375rem;
+  block-size: 4.5rem;
   padding-block: 0.75rem;
   padding-inline-start: 1rem;
   border: 1px solid var(--clr-line);
-  border-radius: 4px;
+  border-radius: 0.5rem;
   font: var(--font-weight-regular) var(--input-font-size)/normal var(--font-family);
   caret-color: var(--clr-primary);
   background-color: var(--clr-surface-2);
