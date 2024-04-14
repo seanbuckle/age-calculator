@@ -193,9 +193,12 @@ window.onload = () => {
       }
     }
     if (
-      Number(day.value) > currentDay &&
-      Number(month.value) >= currentMonth &&
-      Number(year.value) >= currentYear
+      (Number(day.value) > currentDay &&
+        Number(month.value) >= currentMonth &&
+        Number(year.value) >= currentYear) ||
+      (Number(day.value) <= currentDay &&
+        Number(month.value) > currentMonth &&
+        Number(year.value) === currentYear)
     ) {
       dayValid = false;
       monthValid = false;
