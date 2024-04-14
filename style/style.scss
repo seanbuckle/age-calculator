@@ -40,7 +40,6 @@ html[theme="light"] {
   --clr-tooltip: oklch(39.57% 0 0);
   --clr-label: oklch(54.59% 0 0);
   --clr-btn-hover: oklch(19.3% 0 0);
-  transition: color 500ms ease-in-out, background-color 500ms ease-in-out;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -85,6 +84,7 @@ body {
   font: var(--font-weight-regular) var(--body-font-size) / normal
     var(--font-family);
   color: var(--clr-text);
+  transition: color 500ms ease-in-out, background-color 500ms ease-in-out;
 }
 
 .site-header {
@@ -102,6 +102,7 @@ body {
     place-items: center;
     background-color: transparent;
     cursor: pointer;
+    transition: color 500ms ease-in-out, background-color 500ms ease-in-out;
     & > svg {
       fill: var(--clr-text);
     }
@@ -121,6 +122,13 @@ body {
           100% {
             scale: 1;
           }
+        }
+      }
+    }
+    @media (hover: none) {
+      &:hover {
+        &::after {
+          display: none;
         }
       }
     }
@@ -169,13 +177,14 @@ input[type="number"] {
   align-items: center;
   gap: 2rem;
   background-color: var(--clr-surface-2);
-
+  transition: color 500ms ease-in-out, background-color 500ms ease-in-out;
   &__form {
     inline-size: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 2rem;
+    transition: color 500ms ease-in-out, background-color 500ms ease-in-out;
   }
 
   &__input {
@@ -205,15 +214,17 @@ input[type="number"] {
     caret-color: var(--clr-primary);
     background-color: var(--clr-surface-2);
     color: var(--clr-text);
-
+    transition: color 500ms ease-in-out, background-color 500ms ease-in-out;
     &:focus-visible {
       border-color: var(--clr-primary);
     }
     &--error {
       border-color: var(--clr-error);
       caret-color: var(--clr-error);
+      transition: all 500ms ease-in-out;
       &:focus-visible {
         border-color: var(--clr-error);
+        transition: all 200ms ease-in-out;
       }
     }
   }
@@ -223,8 +234,10 @@ input[type="number"] {
     font-weight: var(--font-weight-regular);
     text-transform: uppercase;
     color: var(--clr-label);
+    transition: color 200ms ease-in-out;
     &--error {
       color: var(--clr-error);
+      transition: color 200ms ease-in-out;
     }
   }
 
@@ -235,6 +248,7 @@ input[type="number"] {
     font-style: var(--font-style-italic);
     color: var(--clr-error);
     margin-block-start: 0.5rem;
+    transition: color 200ms ease-in-out;
   }
 
   &__btn-group {
@@ -247,6 +261,7 @@ input[type="number"] {
     inline-size: calc(50% - 32px);
     block-size: 1px;
     background-color: var(--clr-line);
+    transition: background-color 300ms ease-in-out;
   }
 
   &__btn {
@@ -258,8 +273,10 @@ input[type="number"] {
     border-end-end-radius: 50%;
     background-color: var(--clr-primary);
     cursor: pointer;
+    transition: all 300ms ease-in-out;
     &:hover {
       background-color: var(--clr-btn-hover);
+      transition: background-color 200ms ease-in-out;
     }
   }
 
@@ -281,7 +298,7 @@ input[type="number"] {
   }
 }
 
-@container card (inline-size > 561px) {
+@container card (inline-size > 660px) {
   .ac-card {
     padding-block: 3.5rem;
     padding-inline: 3.5rem;
@@ -289,6 +306,11 @@ input[type="number"] {
     gap: 0;
     &__form {
       gap: 0;
+    }
+    &__input {
+      &-group {
+        gap: 2rem;
+      }
     }
     &__hr-line {
       inline-size: calc(100% - 64px);
