@@ -151,8 +151,8 @@ input[type="number"] {
   padding-inline: 1.5rem;
   border-start-start-radius: 1.5rem;
   border-start-end-radius: 1.5rem;
-  border-end-start-radius: 6.25rem;
-  border-end-end-radius: 1.5rem;
+  border-end-start-radius: 1.5rem;
+  border-end-end-radius: 6.25rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -273,8 +273,8 @@ input[type="number"] {
     padding-inline: 3.5rem;
     border-start-start-radius: 1.5rem;
     border-start-end-radius: 1.5rem;
-    border-end-start-radius: 12.5rem;
-    border-end-end-radius: 1.5rem;
+    border-end-start-radius: 1.5rem;
+    border-end-end-radius: 12.5rem;
     gap: 0;
     .ac-card__form {
       gap: 0;
