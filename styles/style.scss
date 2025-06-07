@@ -67,11 +67,34 @@ body {
 
 .site-header {
     block-size: 4rem;
-    padding-inline-end: 1rem;
+    padding-inline: 1rem;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    .site-header__theme-toggle {
+    justify-content: space-between;
+    & > span {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    a[href="https://seanbuckle.com"]{
+        display: none;
+    }
+    &__logo {
+        inline-size: 3rem;
+        block-size: 3rem;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background-color: transparent;
+        transition: all 300ms ease-in-out;
+        & > img {
+            border-radius: 50%;
+        }
+        &:hover {
+            background-color: var(--clr-primary-hover);
+        }
+    }
+    &__theme-toggle {
         inline-size: 3rem;
         block-size: 3rem;
         border-radius: 50%;
@@ -80,6 +103,7 @@ body {
         place-items: center;
         background-color: transparent;
         cursor: pointer;
+        transition: all 300ms ease-in-out;
         & > svg {
             fill: var(--clr-text);
         }
@@ -156,27 +180,27 @@ input[type="number"] {
     align-items: center;
     gap: 2rem;
     background-color: var(--clr-surface-2);
-    .ac-card__form {
+    &__form {
         inline-size: 100%;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         gap: 2rem;
     }
-    .ac-card__input-group {
+    &__input-group {
         inline-size: 100%;
         display: flex;
         flex-wrap: wrap;
         justify-content: flex-start;
         gap: 1rem;
     }
-    .ac-card__input-column {
+    &__input-column {
         inline-size: calc(33.3% - 11px);
         max-inline-size: 10rem;
         display: flex;
         flex-direction: column;
     }
-    .ac-card__date-input {
+    &__date-input {
         block-size: 4.5rem;
         padding-block: 0.75rem;
         padding-inline-start: 1rem;
@@ -201,7 +225,7 @@ input[type="number"] {
             }
         }
     }
-    .ac-card__input-label {
+    &__input-label {
         font-size: var(--label-font-size);
         font-weight: var(--font-weight-regular);
         text-transform: uppercase;
@@ -212,7 +236,7 @@ input[type="number"] {
             transition: color 200ms ease-in-out;
         }
     }
-    .ac-card__error-label {
+    &__error-label {
         block-size: 1.313rem;
         font-size: var(--label-font-size);
         font-weight: var(--font-weight-regular);
@@ -221,17 +245,17 @@ input[type="number"] {
         margin-block-start: 0.5rem;
         transition: color 200ms ease-in-out;
     }
-    .ac-card__btn-group {
+    &__btn-group {
         inline-size: 100%;
         display: flex;
         align-items: center;
     }
-    .ac-card__hr-line {
+    &__hr-line {
         inline-size: calc(50% - 32px);
         block-size: 1px;
         background-color: var(--clr-line);
     }
-    .ac-card__btn {
+    &__btn {
         inline-size: 4rem;
         block-size: 4rem;
         border-start-start-radius: 50%;
@@ -240,23 +264,23 @@ input[type="number"] {
         border-end-end-radius: 50%;
         background-color: var(--clr-primary);
         cursor: pointer;
-        transition: all 300ms ease-in-out;
+        transition: background-color 300ms ease-in-out;
         &:hover {
             background-color: var(--clr-btn-hover);
-            transition: background-color 200ms ease-in-out;
+            
         }
     }
-    .ac-card__btn-icon {
+    &__btn-icon {
         inline-size: 1.5rem;
         block-size: 1.5rem;
     }
-    .ac-card__age-result {
+    &__age-result {
         inline-size: 100%;
         font: var(--font-weight-extra-bold) var(--font-style-italic)
             var(--result-font-size) / 110% var(--font-family);
         letter-spacing: -1.12px;
     }
-    .ac-card__age-number {
+    &__age-number {
         color: var(--clr-primary);
     }
 }
@@ -270,23 +294,23 @@ input[type="number"] {
         border-end-start-radius: 1.5rem;
         border-end-end-radius: 12.5rem;
         gap: 0;
-        .ac-card__form {
+        &__form {
             gap: 0;
         }
-        .ac-card__input-group {
+        &__input-group {
             gap: 2rem;
         }
-        .ac-card__hr-line {
+        &__hr-line {
             inline-size: calc(100% - 64px);
             &[class*="--right"] {
                 display: none;
             }
         }
-        .ac-card__btn {
+        &__btn {
             inline-size: 6rem;
             block-size: 6rem;
         }
-        .ac-card__btn-icon {
+        &__btn-icon {
             inline-size: 2.75rem;
             block-size: 2.75rem;
         }
@@ -298,7 +322,7 @@ input[type="number"] {
     display: grid;
     place-items: center;
     font-size: var(--attribution-font-size);
-    .attribution__link {
+    &__link {
         color: var(--clr-primary);
         text-decoration: none;
         &:hover {
