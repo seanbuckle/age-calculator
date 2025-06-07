@@ -1,0 +1,15 @@
+{
+    "tasks": {
+        "dev": "deno run -A tools/watch_css.ts & deno run -A tools/watch_ts.ts"
+    },
+    "imports": {
+        "@std/assert": "jsr:@std/assert@1.0.13",
+        "npm:esbuild": "npm:esbuild@0.25.5",
+        "jsr:@tsukina-7mochi/esbuild-plugin-sass": "jsr:@tsukina-7mochi/esbuild-plugin-sass@0.2.3"
+    },
+    "compilerOptions": {
+        "strict": true,
+        "lib": ["esnext", "dom", "dom.iterable"]
+    },
+    "unstable": ["sloppy-imports"]
+}
