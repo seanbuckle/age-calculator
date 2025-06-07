@@ -4,3 +4,4 @@
 *.scss.map
 tsconfig.json
 .vscode/
+deno.lock
