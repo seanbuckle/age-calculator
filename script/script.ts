@@ -349,6 +349,7 @@ globalThis.onload = () => {
      */
     const lightModeIcon: string = `<svg xmlns="http://www.w3.org/2000/svg" height="1.5rem" viewBox="0 -960 960 960" width="1.5rem"><path d="M480-360q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35Zm0 80q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480q0 83-58.5 141.5T480-280ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Zm326-268Z"/></svg>`;
     let local = localStorage.getItem("theme");
+    let label = localStorage.getItem("theme-label");
 
     const isDark: MediaQueryList = globalThis.matchMedia(
         "(prefers-color-scheme: dark)"
@@ -361,32 +362,34 @@ globalThis.onload = () => {
             root.setAttribute("theme", "dark");
             themeToggle.innerHTML = lightModeIcon;
             themeToggle.setAttribute("tooltip", darkTooltip);
+            themeToggle.setAttribute("aria-label", darkTooltip);
         } else {
             themeToggle.innerHTML = darkModeIcon;
             root.setAttribute("theme", local ?? "");
             themeToggle.setAttribute("tooltip", lightTooltip);
+            themeToggle.setAttribute("aria-label", lightTooltip);
         }
-        themeToggle.setAttribute("aria-label", local ?? "");
+        themeToggle.setAttribute("aria-label", label ?? "");
     }
 
     if (local === null) {
         if (isDark.matches) {
             themeToggle.innerHTML = lightModeIcon;
-            themeToggle.setAttribute("aria-label", "dark");
+            themeToggle.setAttribute("aria-label", darkTooltip);
             themeToggle.setAttribute("tooltip", darkTooltip);
         } else {
             themeToggle.innerHTML = darkModeIcon;
-            themeToggle.setAttribute("aria-label", "light");
+            themeToggle.setAttribute("aria-label", lightTooltip);
             themeToggle.setAttribute("tooltip", lightTooltip);
         }
         isDark.addEventListener("change", () => {
             if (isDark.matches) {
                 themeToggle.innerHTML = lightModeIcon;
-                themeToggle.setAttribute("aria-label", "dark");
+                themeToggle.setAttribute("aria-label", darkTooltip);
                 themeToggle.setAttribute("tooltip", darkTooltip);
             } else {
                 themeToggle.innerHTML = darkModeIcon;
-                themeToggle.setAttribute("aria-label", "light");
+                themeToggle.setAttribute("aria-label", lightTooltip);
                 themeToggle.setAttribute("tooltip", lightTooltip);
             }
         });
@@ -398,20 +401,25 @@ globalThis.onload = () => {
         if (local === null) {
             if (isDark.matches) {
                 local = "light";
+                label = lightTooltip;
             } else {
                 local = "dark";
+                label = darkTooltip;
             }
         } else {
             if (local === "dark") {
                 local = "light";
+                label = darkTooltip;
             } else {
                 local = "dark";
+                label = lightTooltip;
             }
         }
         localStorage.setItem("theme", local);
+        localStorage.setItem("theme-label", label ?? "");
         root.setAttribute("theme", local);
         themeToggle.innerHTML = local === "dark" ? lightModeIcon : darkModeIcon;
-        themeToggle.setAttribute("aria-label", local ?? "");
+        themeToggle.setAttribute("aria-label", label ?? "");
         themeToggle.setAttribute(
             "tooltip",
             local === "dark" ? darkTooltip : lightTooltip
