@@ -71,12 +71,13 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    & > span {
+    & > div {
         display: flex;
         align-items: center;
         gap: 0.5rem;
     }
-    a[href="https://seanbuckle.com"]{
+    a[href="https://seanbuckle.com"]
+    {
         display: none;
     }
     &__logo {
@@ -86,13 +87,18 @@ body {
         display: grid;
         place-items: center;
         background-color: transparent;
-        transition: all 300ms ease-in-out;
+        transition: background-color 300ms ease-in-out;
         & > img {
             border-radius: 50%;
         }
         &:hover {
             background-color: var(--clr-primary-hover);
         }
+    }
+    &__title {
+        font: var(--font-weight-bold) var(--body-font-size) / normal
+            var(--font-family);
+        color: green;
     }
     &__theme-toggle {
         inline-size: 3rem;
@@ -103,7 +109,7 @@ body {
         place-items: center;
         background-color: transparent;
         cursor: pointer;
-        transition: all 300ms ease-in-out;
+        transition: fill, background-color 300ms ease-in-out;
         & > svg {
             fill: var(--clr-text);
         }
@@ -218,10 +224,10 @@ input[type="number"] {
         &[class*="--error"] {
             border-color: var(--clr-error);
             caret-color: var(--clr-error);
-            transition: all 500ms ease-in-out;
+            transition: border-color, caret-color 500ms ease-in-out;
             &:focus-visible {
                 border-color: var(--clr-error);
-                transition: all 200ms ease-in-out;
+                transition: border-color, caret-color 200ms ease-in-out;
             }
         }
     }
@@ -267,7 +273,6 @@ input[type="number"] {
         transition: background-color 300ms ease-in-out;
         &:hover {
             background-color: var(--clr-btn-hover);
-            
         }
     }
     &__btn-icon {
