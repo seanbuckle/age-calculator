@@ -96,9 +96,8 @@ body {
         }
     }
     &__title {
-        font: var(--font-weight-bold) var(--body-font-size) / normal
-            var(--font-family);
-        color: green;
+        font: var(--font-weight-bold) clamp(var(--body-font-size), 4vw, 2rem) /
+            normal var(--font-family);
     }
     &__theme-toggle {
         inline-size: 3rem;
