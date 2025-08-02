@@ -28,12 +28,12 @@
 
 <body>
   <header class="site-header" aria-labelledby="header-title">
-    <span>
+    <div>
       <a href="https://seanbuckle.com" class="site-header__logo"><img src="/images/logo.svg"
           alt="Sean Buckle logo" /></a>
       <h1 class="site-header__title">Age calculator</h1>
-    </span>
-    <button class="site-header__theme-toggle" id="theme-toggle" aria-label="auto" aria-live="polite">
+    </div>
+    <button type="button" class="site-header__theme-toggle" id="theme-toggle" aria-label="auto" aria-live="polite">
     </button>
   </header>
   <main class="site-main">
@@ -41,23 +41,22 @@
       <form id="form" class="ac-card__form">
         <div class="ac-card__input-group">
           <div class="ac-card__input-column">
-            <label for="day" id="day-label" class="ac-card__input-label" aria-labelledby="day-label">Day</label>
+            <label for="day" id="day-label" class="ac-card__input-label">Day</label>
             <input type="number" name="day" id="day" class="ac-card__date-input" placeholder="DD" required
-              aria-required="true" aria-label="Day" />
-            <label id="day-error" class="ac-card__error-label" aria-live="polite" aria-labelledby="day-error"></label>
+              aria-required="true" />
+            <label id="day-error" class="ac-card__error-label" aria-live="polite"></label>
           </div>
           <div class="ac-card__input-column">
-            <label for="month" id="month-label" class="ac-card__input-label" aria-labelledby="month-label">Month</label>
+            <label for="month" id="month-label" class="ac-card__input-label">Month</label>
             <input type="number" name="month" id="month" class="ac-card__date-input" placeholder="MM" required
-              aria-required="true" aria-label="Month" />
-            <label id="month-error" class="ac-card__error-label" aria-live="polite"
-              aria-labelledby="month-error"></label>
+              aria-required="true" />
+            <label id="month-error" class="ac-card__error-label" aria-live="polite"></label>
           </div>
           <div class="ac-card__input-column">
-            <label for="year" id="year-label" class="ac-card__input-label" aria-labelledby="year-label">Year</label>
+            <label for="year" id="year-label" class="ac-card__input-label">Year</label>
             <input type="number" name="year" id="year" class="ac-card__date-input" placeholder="YYYY" required
               aria-required="true" aria-label="Year" />
-            <label id="year-error" class="ac-card__error-label" aria-live="polite" aria-labelledby="year-error"></label>
+            <label id="year-error" class="ac-card__error-label" aria-live="polite"></label>
           </div>
         </div>
         <div class="ac-card__btn-group">
